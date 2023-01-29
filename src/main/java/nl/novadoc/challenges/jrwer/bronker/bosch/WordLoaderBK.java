@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.bronkerbosch;
+package nl.novadoc.challenges.jrwer.bronker.bosch;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

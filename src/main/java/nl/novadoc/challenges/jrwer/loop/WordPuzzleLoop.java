@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer;
+package nl.novadoc.challenges.jrwer.loop;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

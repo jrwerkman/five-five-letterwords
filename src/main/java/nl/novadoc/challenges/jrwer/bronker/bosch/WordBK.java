@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.bronkerbosch;
+package nl.novadoc.challenges.jrwer.bronker.bosch;
 
 import java.util.HashSet;
 import java.util.Set;

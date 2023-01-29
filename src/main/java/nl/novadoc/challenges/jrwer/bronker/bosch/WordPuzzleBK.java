@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.bronkerbosch;
+package nl.novadoc.challenges.jrwer.bronker.bosch;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import nl.novadoc.challenges.jrwer.Sentence;
+import nl.novadoc.challenges.jrwer.loop.Sentence;
 
 /**
  * words: https://github.com/dwyl/english-words/blob/master/words_alpha.txt
