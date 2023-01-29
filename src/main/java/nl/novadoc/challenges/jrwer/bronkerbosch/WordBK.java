@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 class WordBK {
-	final Set<WordBK> neighbours = new HashSet<>();
+	private final Set<WordBK> neighbours = new HashSet<>();
 	final String word;
 	final int fingerprint;
 	final Set<WordBK> allWords;
