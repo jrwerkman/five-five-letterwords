@@ -11,8 +11,10 @@ import nl.novadoc.challenges.jrwer.Sentence;
 /**
  * words: https://github.com/dwyl/english-words/blob/master/words_alpha.txt
  * 
+ * Source from:
  * https://en.wikipedia.org/wiki/Clique_problem
  * https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm
+ * https://www.youtube.com/watch?v=j_uQChgo72I
  * 
  * 5 word, 5 letters, 25 different letters
  * 
