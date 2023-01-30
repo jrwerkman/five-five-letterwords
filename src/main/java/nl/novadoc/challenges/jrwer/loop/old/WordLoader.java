@@ -1,23 +1,18 @@
-package nl.novadoc.challenges.jrwer.bron.kerbosch;
+package nl.novadoc.challenges.jrwer.loop.old;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class WordLoader {
 	public static final Map<Character, Integer> charsToBit = new HashMap<>();
 	public static final Map<Integer, Character> bitsToChar = new HashMap<>();
-	
-	public Map<Integer, List<String>> words = new HashMap<>();
-	public Set<Integer> fingerprints = new HashSet<>();
 	
 	static {
 		for(int i=0; i<26; i++) {
@@ -26,7 +21,8 @@ public class WordLoader {
 		}
 	}
 	
-	public void loadWords() throws FileNotFoundException, IOException {
+	public static Set<Word> loadWords() throws FileNotFoundException, IOException {
+		Set<Word> words = new HashSet<>();
 		
 		try (InputStream is = WordLoader.class.getClassLoader().getResourceAsStream("words_alpha.txt");
 				BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
@@ -45,21 +41,13 @@ public class WordLoader {
 			    		else
 			    			break;
 			    		
-			    		if(i == 4) {
-			    			fingerprints.add(fingerprint);
-			    			
-			    			if(words.containsKey(fingerprint)) {
-			    				words.get(fingerprint).add(line);
-			    			} else {
-			    				List<String> l = new ArrayList<>();
-			    				l.add(line);
-			    				
-			    				words.put(fingerprint, l);
-			    			}
-			    		}
+			    		if(i == 4)
+			    			words.add(new Word(line, fingerprint));
 			    	}
 			    }
 			}
 		}
+		
+		return words;
 	}
 }

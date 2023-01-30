@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import nl.novadoc.challenges.jrwer.loop.Sentence;
+import nl.novadoc.challenges.jrwer.loop.old.Sentence;
 
 /**
  * words: https://github.com/dwyl/english-words/blob/master/words_alpha.txt

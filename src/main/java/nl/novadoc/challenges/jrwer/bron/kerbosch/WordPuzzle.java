@@ -1,13 +1,13 @@
 package nl.novadoc.challenges.jrwer.bron.kerbosch;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import nl.novadoc.challenges.jrwer.IWordLoader;
+import nl.novadoc.challenges.jrwer.loader.WordLoader;
 
 /**
  * words: https://github.com/dwyl/english-words/blob/master/words_alpha.txt
@@ -17,7 +17,7 @@ import java.util.Set;
  * @author jan
  *
  */
-public class WordPuzzle extends WordLoader{
+public class WordPuzzle extends WordLoader implements IWordLoader {
 	public static void main(String[] args) {
 		try {
 			WordPuzzle p = new WordPuzzle();
@@ -28,12 +28,10 @@ public class WordPuzzle extends WordLoader{
 	}
 	
 	public Map<Integer, Set<Integer>> neighboursCache = new HashMap<>();
+	public long loading, start, end;
 	
-	public WordPuzzle() throws FileNotFoundException, IOException {
-	}
-	
-	long loading, start, end;
-	public void start() throws FileNotFoundException, IOException {
+	@Override
+	public void start() throws Exception {
 		loading = System.currentTimeMillis();
 		loadWords();
 		end = System.currentTimeMillis();
@@ -45,7 +43,7 @@ public class WordPuzzle extends WordLoader{
 		candidateSet.addAll(fingerprints);
 		
 		Set<Integer> results = execute(new HashSet<>(), candidateSet, new HashSet<>());
-		System.out.println(String.format("Results: [%s]", print(results)));
+		System.out.println(String.format("Results: [%s]", print(results, words)));
 		end = System.currentTimeMillis();
 		
 		System.out.println(String.format("Finding sentence took: %d ms", end - start));
@@ -107,27 +105,5 @@ public class WordPuzzle extends WordLoader{
 				neighbours.add(f);
 		
 		return neighbours;
-	}
-	
-	public String print(Set<Integer> results) {
-		if(results.isEmpty())
-			return "";
-		
-		StringBuilder sb = new StringBuilder();
-		
-		for(Integer r : results) {
-			List<String> wordList = words.get(r);
-			
-			for(int i=0; i<wordList.size(); i++) {
-				sb.append(wordList.get(i));
-				
-				if(i<wordList.size() - 1)
-					sb.append('|');
-			}
-			
-			sb.append(' ');
-		}
-		
-		return sb.toString().substring(0, sb.length() - 1);		
 	}
 }

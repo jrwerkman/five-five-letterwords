@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.loop;
+package nl.novadoc.challenges.jrwer.loop.old;
 
 public class Sentence {
 	final int fingerprint;
