@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.bron.kerbosch;
+package nl.novadoc.challenges.jrwer.bron.kerbosch.old;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

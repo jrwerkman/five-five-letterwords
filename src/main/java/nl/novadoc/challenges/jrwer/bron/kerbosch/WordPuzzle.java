@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.bron.kerbosch.faster;
+package nl.novadoc.challenges.jrwer.bron.kerbosch;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -116,9 +116,16 @@ public class WordPuzzle extends WordLoader{
 		StringBuilder sb = new StringBuilder();
 		
 		for(Integer r : results) {
-			List<String> word = words.get(r);
+			List<String> wordList = words.get(r);
 			
-			sb.append(word.get(0)).append(' ');
+			for(int i=0; i<wordList.size(); i++) {
+				sb.append(wordList.get(i));
+				
+				if(i<wordList.size() - 1)
+					sb.append('|');
+			}
+			
+			sb.append(' ');
 		}
 		
 		return sb.toString().substring(0, sb.length() - 1);		
