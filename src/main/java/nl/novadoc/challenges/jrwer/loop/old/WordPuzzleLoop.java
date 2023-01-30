@@ -48,7 +48,6 @@ public class WordPuzzleLoop {
 		if(best.complete())
 			return;
 		
-		
 		for(Word w : words) {
 			Sentence newS = new Sentence(s, w);
 			

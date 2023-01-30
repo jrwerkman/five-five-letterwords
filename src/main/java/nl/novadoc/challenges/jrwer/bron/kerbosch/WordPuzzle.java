@@ -6,18 +6,22 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import nl.novadoc.challenges.jrwer.IWordLoader;
-import nl.novadoc.challenges.jrwer.loader.WordLoader;
+import nl.novadoc.challenges.jrwer.WordFinderBase;
 
 /**
  * words: https://github.com/dwyl/english-words/blob/master/words_alpha.txt
+ * 
+ * Source from:
+ * https://en.wikipedia.org/wiki/Clique_problem
+ * https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm
+ * https://www.youtube.com/watch?v=j_uQChgo72I
  * 
  * 5 word, 5 letters, 25 different letters
  * 
  * @author jan
  *
  */
-public class WordPuzzle extends WordLoader implements IWordLoader {
+public class WordPuzzle extends WordFinderBase {
 	public static void main(String[] args) {
 		try {
 			WordPuzzle p = new WordPuzzle();
@@ -43,7 +47,7 @@ public class WordPuzzle extends WordLoader implements IWordLoader {
 		candidateSet.addAll(fingerprints);
 		
 		Set<Integer> results = execute(new HashSet<>(), candidateSet, new HashSet<>());
-		System.out.println(String.format("Results: [%s]", print(results, words)));
+		System.out.println(String.format("Results: [%s]", toString(results, words)));
 		end = System.currentTimeMillis();
 		
 		System.out.println(String.format("Finding sentence took: %d ms", end - start));

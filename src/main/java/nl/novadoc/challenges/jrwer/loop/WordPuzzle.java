@@ -3,8 +3,8 @@ package nl.novadoc.challenges.jrwer.loop;
 import java.util.HashSet;
 import java.util.Set;
 
-import nl.novadoc.challenges.jrwer.IWordLoader;
-import nl.novadoc.challenges.jrwer.loader.WordLoader;
+import nl.novadoc.challenges.jrwer.Data;
+import nl.novadoc.challenges.jrwer.WordFinderBase;
 
 /**
  * words: https://github.com/dwyl/english-words/blob/master/words_alpha.txt
@@ -14,7 +14,7 @@ import nl.novadoc.challenges.jrwer.loader.WordLoader;
  * @author jan
  *
  */
-public class WordPuzzle extends WordLoader implements IWordLoader {
+public class WordPuzzle extends WordFinderBase {
 	public static void main(String[] args) {
 		try {
 			WordPuzzle p = new WordPuzzle();
@@ -25,8 +25,8 @@ public class WordPuzzle extends WordLoader implements IWordLoader {
 	}
 	
 	public long loading, start, end;
-	public Set<Integer> best = new HashSet<>();
-	public Set<Integer> visited = new HashSet<>();
+	public Data best = new Data();
+	public Set<Data> visited = new HashSet<>();
 
 	@Override
 	public void start() throws Exception {
@@ -34,57 +34,46 @@ public class WordPuzzle extends WordLoader implements IWordLoader {
 		loadWords();
 		end = System.currentTimeMillis();
 		System.out.println("Loading wordlist took: " + (end - loading) + " ms");
-		System.out.println(String.format("Loaded distinct %d words", words.size()));
+		System.out.println(String.format("Procesed %d words", totalWords));
+		System.out.println(String.format("Loaded distinct %d 5 letter words, with 5 different chars", word5_5letters));
+		System.out.println(String.format("Loaded distinct unique letter %d words, with 5 different chars", words.size()));
 
 		start = System.currentTimeMillis();
-		Set<Integer> results = execute();
-		print(results, words);
+		Data results = execute();
 		
 		end = System.currentTimeMillis();
 		
-		System.out.println(String.format("Finding sentence took: %d ms", end - start));
+		System.out.println("\nResult:");
+		System.out.println(toString(results, words));
+		System.out.println("\nCharacters used:");
+		System.out.println(getCharactersUsed(results));
+		
+		System.out.println(String.format("\nFinding sentence took: %d ms", end - start));
 		System.out.println(String.format("Total time took: %d ms", end - loading));
 	}
 	
-	public Set<Integer> execute() {
+	public Data execute() {
 		loopWords(best);
 		
 		return best;
 	}
 	
-	public void loopWords(Set<Integer> s) {
-		if(best.size() == 5)
+	public void loopWords(Data currentData) {
+		if(best.complete())
 			return;
 		
-		for(Integer w : fingerprints) {
-			Set<Integer> newS = new HashSet<>();
-			newS.addAll(s);
-			newS.add(w);
+		for(Integer fp : fingerprints) {
+			Data nextData = new Data(currentData, fp);
 			
-			if(visited.contains(w))
+			if(!nextData.correct() || visited.contains(nextData))
 				continue;
 
-			visited.add(w);
+			visited.add(nextData);
 			
-			if(best.size() < newS.size())
-				best = newS;
-
-			if(correct(newS))
-				loopWords(newS);
+			if(best.length() < nextData.length())
+				best = nextData;
+			
+			loopWords(nextData);
 		}
 	}
-	
-	public boolean correct(Set<Integer> s) {
-		int fp = 0;
-		
-		for(Integer w:s) {
-			if ((fp & w) != 0)
-				return false;
-			
-			fp = fp | w;
-		}
-		
-		return true;
-	}
-
 }
