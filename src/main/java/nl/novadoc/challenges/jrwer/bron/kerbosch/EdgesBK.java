@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.bronker.bosch;
+package nl.novadoc.challenges.jrwer.bron.kerbosch;
 
 public class EdgesBK {
 	final WordBK a, b;

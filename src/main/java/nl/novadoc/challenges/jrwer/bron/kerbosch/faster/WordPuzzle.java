@@ -30,29 +30,32 @@ public class WordPuzzle extends WordLoader{
 	public Map<Integer, Set<Integer>> neighboursCache = new HashMap<>();
 	
 	public WordPuzzle() throws FileNotFoundException, IOException {
-		loadWords();
 	}
 	
+	long loading, start, end;
 	public void start() throws FileNotFoundException, IOException {
-		long start = System.currentTimeMillis();
+		loading = System.currentTimeMillis();
+		loadWords();
+		end = System.currentTimeMillis();
+		System.out.println("Loading wordlist took: " + (end - loading) + " ms");
+		System.out.println(String.format("Loaded distinct %d words", words.size()));
+
+		start = System.currentTimeMillis();
 		Set<Integer> candidateSet = new HashSet<>();
 		candidateSet.addAll(fingerprints);
 		
 		Set<Integer> results = execute(new HashSet<>(), candidateSet, new HashSet<>());
-		print(results);
-
+		System.out.println(String.format("Results: [%s]", print(results)));
+		end = System.currentTimeMillis();
 		
-		long end = System.currentTimeMillis();
-		
-		System.out.println("Process took: " + (end - start) + " ms\n");
+		System.out.println(String.format("Finding sentence took: %d ms", end - start));
+		System.out.println(String.format("Total time took: %d ms", end - loading));
 	}
 
 	public Set<Integer> execute(Set<Integer> currentClique, Set<Integer> candidateSet, Set<Integer> exclusionSet) {
 		if((candidateSet.isEmpty() && exclusionSet.isEmpty()) || currentClique.size() == 5)
-			if(currentClique.size() == 5) {
-				print(candidateSet);
+			if(currentClique.size() == 5)
 				return currentClique;
-			}
 	
 		Iterator<Integer> it = candidateSet.iterator();
 		while(it.hasNext()) {
@@ -106,7 +109,10 @@ public class WordPuzzle extends WordLoader{
 		return neighbours;
 	}
 	
-	public void print(Set<Integer> results) {
+	public String print(Set<Integer> results) {
+		if(results.isEmpty())
+			return "";
+		
 		StringBuilder sb = new StringBuilder();
 		
 		for(Integer r : results) {
@@ -115,6 +121,6 @@ public class WordPuzzle extends WordLoader{
 			sb.append(word.get(0)).append(' ');
 		}
 		
-		System.out.println(sb);		
+		return sb.toString().substring(0, sb.length() - 1);		
 	}
 }

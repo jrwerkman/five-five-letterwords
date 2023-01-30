@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.bronker.bosch;
+package nl.novadoc.challenges.jrwer.bron.kerbosch;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
