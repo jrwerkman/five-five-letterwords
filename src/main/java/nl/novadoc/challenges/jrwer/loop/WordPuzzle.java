@@ -33,10 +33,10 @@ public class WordPuzzle extends WordFinderBase {
 		loading = System.currentTimeMillis();
 		loadWords();
 		end = System.currentTimeMillis();
-		System.out.println("Loading wordlist took: " + (end - loading) + " ms");
 		System.out.println(String.format("Procesed %d words", totalWords));
-		System.out.println(String.format("Loaded distinct %d 5 letter words, with 5 different chars", word5_5letters));
-		System.out.println(String.format("Loaded distinct unique letter %d words, with 5 different chars", words.size()));
+		System.out.println(String.format("Loaded distinct %d five letter words, with five different chars", word5_5letters));
+		System.out.println(String.format("Loaded distinct unique letter %d words, with five different chars", words.size()));
+		System.out.println("Loading wordlist took: " + (end - loading) + " ms");
 
 		start = System.currentTimeMillis();
 		Data results = execute();
