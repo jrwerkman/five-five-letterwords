@@ -40,7 +40,6 @@ public class WordPuzzle extends WordFinderBase {
 
 		start = System.currentTimeMillis();
 		Data results = execute();
-		
 		end = System.currentTimeMillis();
 		
 		System.out.println("\nResult:");

@@ -31,27 +31,52 @@ public class WordPuzzle extends WordFinderBase {
 		}
 	}
 	
+	@Override
+	public void start() throws Exception {
+		loadWords();
+		
+		findFirst();
+		findAll();
+	}
+	
 	public Map<Integer, Set<Integer>> neighboursCache = new HashMap<>();
 	public long loading, start, end;
 	
-	@Override
-	public void start() throws Exception {
-		loading = System.currentTimeMillis();
-		loadWords();
-		end = System.currentTimeMillis();
-		System.out.println("Loading wordlist took: " + (end - loading) + " ms");
-		System.out.println(String.format("Loaded distinct %d words", words.size()));
-
+	public void findAll() throws Exception {
 		start = System.currentTimeMillis();
 		Set<Integer> candidateSet = new HashSet<>();
 		candidateSet.addAll(fingerprints);
-		
+		findAll(new HashSet<>(), candidateSet, new HashSet<>());
+		end = System.currentTimeMillis();
+
+		System.out.println(String.format("\nFinding sentences took: %d ms", end - start));
+		System.out.println(String.format("Total time took: %d ms", end - loading));
+	}
+	
+	public void findFirst() throws Exception {
+		start = System.currentTimeMillis();
+		Set<Integer> candidateSet = new HashSet<>();
+		candidateSet.addAll(fingerprints);
 		Set<Integer> results = execute(new HashSet<>(), candidateSet, new HashSet<>());
-		System.out.println(String.format("Results: [%s]", toString(results, words)));
 		end = System.currentTimeMillis();
 		
-		System.out.println(String.format("Finding sentence took: %d ms", end - start));
+		System.out.println("\nResult:");
+		System.out.println(toString(results, words));
+		System.out.println("\nCharacters used:");
+		System.out.println(getCharactersUsed(results));
+		
+		System.out.println(String.format("\nFinding sentence took: %d ms", end - start));
 		System.out.println(String.format("Total time took: %d ms", end - loading));
+	}
+	
+	public void loadWords() {
+		loading = System.currentTimeMillis();
+		loadWords();
+		end = System.currentTimeMillis();
+		System.out.println(String.format("Procesed %d words", totalWords));
+		System.out.println(String.format("Loaded distinct %d five letter words, with five different chars", word5_5letters));
+		System.out.println(String.format("Loaded distinct unique letter %d words, with five different chars", words.size()));
+		System.out.println("Loading wordlist took: " + (end - loading) + " ms\n");		
 	}
 
 	public Set<Integer> execute(Set<Integer> currentClique, Set<Integer> candidateSet, Set<Integer> exclusionSet) {
@@ -77,6 +102,27 @@ public class WordPuzzle extends WordFinderBase {
 		}
 		
 		return null;
+	}
+
+	public void findAll(Set<Integer> currentClique, Set<Integer> candidateSet, Set<Integer> exclusionSet) {
+		if((candidateSet.isEmpty() && exclusionSet.isEmpty()) || currentClique.size() == 5) {
+			if(currentClique.size() == 5)
+				System.out.println(toString(currentClique, words));
+		} else {
+			Iterator<Integer> it = candidateSet.iterator();
+			while(it.hasNext()) {
+				Integer candidate = it.next();
+				
+				Set<Integer> newClique = getNewClique(currentClique, candidate);
+				Set<Integer> neighbours = neighbours(candidate);
+				Set<Integer> newCandidateSet = intersectSet(candidateSet, neighbours);
+				Set<Integer> newExclusionSet = intersectSet(exclusionSet, neighbours);
+				
+				findAll(newClique, newCandidateSet, newExclusionSet);
+				it.remove();
+				exclusionSet.add(candidate);
+			}
+		}
 	}
 	
 	public Set<Integer> getNewClique(Set<Integer> currentClique, Integer candidate) {

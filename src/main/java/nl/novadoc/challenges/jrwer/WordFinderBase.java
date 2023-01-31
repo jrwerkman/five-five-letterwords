@@ -48,6 +48,24 @@ public abstract class WordFinderBase {
 		return sb.toString();
 	}
 	
+	public String getCharactersUsed(Set<Integer> results) {
+		StringBuilder sb = new StringBuilder();
+		int fingerprint = 0;
+		
+		for(Integer i : results)
+			fingerprint = fingerprint | i;
+		
+		sb.append("a b c d e f g h i j k l m n o p q r s t u v w x y z \n");
+		if((fingerprint & charsToBit.get('a')) == 0)
+			sb.append("  ");
+		
+		String fingerPrintString = Integer.toBinaryString(fingerprint); 
+		for(int i=fingerPrintString.length() - 1; i>=0; i--)
+			sb.append(fingerPrintString.charAt(i)).append(' ');
+		
+		return sb.toString();
+	}
+	
 	public String toString(Data data, Map<Integer, List<String>> words) {
 		if(data.length() == 0)
 			return "";
