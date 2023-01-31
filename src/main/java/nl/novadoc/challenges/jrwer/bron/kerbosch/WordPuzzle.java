@@ -90,8 +90,9 @@ public class WordPuzzle extends WordFinderBase {
 	public Set<Integer> intersectSet(Set<Integer> a, Set<Integer> b) {
 		Set<Integer> newSet = new HashSet<>();
 		
-		newSet.addAll(a);
-		newSet.retainAll(b);
+		for(Integer i : a)
+			if(b.contains(i))
+				newSet.add(i);
 		
 		return newSet;
 		
