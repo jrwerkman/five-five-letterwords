@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.bron.kerbosch;
+package nl.jrwer.challenges.bron.kerbosch;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import nl.novadoc.challenges.jrwer.WordFinderBase;
+import nl.jrwer.challenges.WordFinderBase;
 
 /**
  * words: https://github.com/dwyl/english-words/blob/master/words_alpha.txt

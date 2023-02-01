@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer;
+package nl.jrwer.challenges;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import nl.novadoc.challenges.jrwer.loop.old.WordLoader;
+import nl.jrwer.challenges.loop.old.WordLoader;
 
 public abstract class WordFinderBase {
 	public static final Map<Character, Integer> charsToBit = new HashMap<>();

@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.loop.old;
+package nl.jrwer.challenges.bron.kerbosch.old;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class WordLoader {
+public class WordLoaderBK {
 	public static final Map<Character, Integer> charsToBit = new HashMap<>();
 	public static final Map<Integer, Character> bitsToChar = new HashMap<>();
 	
@@ -21,10 +21,13 @@ public class WordLoader {
 		}
 	}
 	
-	public static Set<Word> loadWords() throws FileNotFoundException, IOException {
-		Set<Word> words = new HashSet<>();
+//	public static Set<EdgesBK> edges = new HashSet<>();
+//	public static Set<WordBK> words = new HashSet<>();
+	
+	public static Set<WordBK> loadWords() throws FileNotFoundException, IOException {
+		Set<WordBK> words = new HashSet<>();
 		
-		try (InputStream is = WordLoader.class.getClassLoader().getResourceAsStream("words_alpha.txt");
+		try (InputStream is = WordLoaderBK.class.getClassLoader().getResourceAsStream("words_alpha.txt");
 				BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 			String line;
 			
@@ -42,7 +45,7 @@ public class WordLoader {
 			    			break;
 			    		
 			    		if(i == 4)
-			    			words.add(new Word(line, fingerprint));
+			    			words.add(new WordBK(line, fingerprint, words));
 			    	}
 			    }
 			}

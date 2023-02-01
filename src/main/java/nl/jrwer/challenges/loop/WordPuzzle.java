@@ -1,10 +1,10 @@
-package nl.novadoc.challenges.jrwer.loop;
+package nl.jrwer.challenges.loop;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import nl.novadoc.challenges.jrwer.Data;
-import nl.novadoc.challenges.jrwer.WordFinderBase;
+import nl.jrwer.challenges.Data;
+import nl.jrwer.challenges.WordFinderBase;
 
 /**
  * words: https://github.com/dwyl/english-words/blob/master/words_alpha.txt

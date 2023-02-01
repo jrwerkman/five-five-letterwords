@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer.loop.old;
+package nl.jrwer.challenges.loop.old;
 
 class Word {
 	final String word;

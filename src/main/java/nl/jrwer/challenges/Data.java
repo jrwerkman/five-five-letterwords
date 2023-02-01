@@ -1,4 +1,4 @@
-package nl.novadoc.challenges.jrwer;
+package nl.jrwer.challenges;
 
 import java.util.Arrays;
 
