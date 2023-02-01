@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>nl.novadoc.challenges</groupId>
-	<artifactId>dev-challenges-2023-02-jrwerkman</artifactId>
+	<groupId>nl.jrwer.challenges</groupId>
+	<artifactId>prime-finder</artifactId>
 	<version>0.0.1</version>
 
 	<properties>
@@ -19,7 +19,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>nl.novadoc.challenges.jrwer.WordPuzzleLoop</mainClass>
+							<mainClass>nl.novadoc.challenges.jrwer.bron.kerbosch.WordPuzzle</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

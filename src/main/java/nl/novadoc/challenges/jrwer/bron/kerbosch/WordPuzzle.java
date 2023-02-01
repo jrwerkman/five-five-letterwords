@@ -1,5 +1,7 @@
 package nl.novadoc.challenges.jrwer.bron.kerbosch;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -36,7 +38,7 @@ public class WordPuzzle extends WordFinderBase {
 		loadWords();
 		
 		findFirst();
-		findAll();
+//		findAll();
 	}
 	
 	public Map<Integer, Set<Integer>> neighboursCache = new HashMap<>();
@@ -69,9 +71,9 @@ public class WordPuzzle extends WordFinderBase {
 		System.out.println(String.format("Total time took: %d ms", end - loading));
 	}
 	
-	public void loadWords() {
+	public void loadWords() throws FileNotFoundException, IOException {
 		loading = System.currentTimeMillis();
-		loadWords();
+		super.loadWords();
 		end = System.currentTimeMillis();
 		System.out.println(String.format("Procesed %d words", totalWords));
 		System.out.println(String.format("Loaded distinct %d five letter words, with five different chars", word5_5letters));
