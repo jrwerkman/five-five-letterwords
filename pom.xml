@@ -19,7 +19,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>nl.novadoc.challenges.jrwer.bron.kerbosch.WordPuzzle</mainClass>
+							<mainClass>nl.jrwer.challenges.bron.kerbosch.WordPuzzle</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
